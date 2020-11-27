@@ -11,12 +11,14 @@
         "build": "node_modules/.bin/tsc"
     },
     "dependencies": {
-        "@types/node": "8.10.54",
         "@types/bluebird": "^3.5.19",
-        "pinus": "1.4.10",
+        "@types/node": "8.10.54",
         "bluebird": "^3.5.1",
-        "source-map-support": "^0.5.0",
-        "reflect-metadata": "^0.1.10"
+        "pinus": "1.4.10",
+        "redis": "^3.0.2",
+        "redlock": "^4.2.0",
+        "reflect-metadata": "^0.1.10",
+        "source-map-support": "^0.5.0"
     },
     "devDependencies": {
         "tslint": "5.20.1",
