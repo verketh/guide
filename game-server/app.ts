@@ -2,6 +2,7 @@ import { pinus } from 'pinus';
 import { preload } from './preload';
 import _pinus = require('pinus');
 import RedisManager from './app/redis/RedisManager';
+import DaoManager from './app/dao/DaoManager';
 
 const filePath = (_pinus as any).FILEPATH;
 filePath.MASTER = '/config/master';
@@ -44,10 +45,14 @@ app.configure('production|development', 'connector', function () {
 
 //redis配置
 app.loadConfig('redis',app.getBase() + '/config/redis');
+//mysql配置
+app.loadConfig('mysql',app.getBase() + '/config/mysql')
 
 app.configure('production|development', "master|connector", function () {
     //redis管理初始化
     new RedisManager(app);
+    //mysql管理初始化
+    new DaoManager(app);
 });
 
 // start app
