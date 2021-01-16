@@ -26,7 +26,7 @@ export class CryptoUtil {
      * AES解密
      * @param encrypted 
      */
-    public static aesDecrypt(encrypted:string) {
+    public static aesDecrypt(encrypted: string): string {
         const decipher = crypto.createDecipher('aes-256-cbc', CryptoUtil.ENCRYPT_KEY);
         var decrypted = decipher.update(encrypted, 'base64', 'utf8');
         decrypted += decipher.final('utf8');
