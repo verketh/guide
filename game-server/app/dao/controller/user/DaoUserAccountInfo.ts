@@ -43,4 +43,35 @@ export class DaoUserAccountInfo extends DaoAbsController{
             return DaoResult.succeed(res[0]);
         });
     }
+    /**
+     * 查询用户信息
+     * @param uid 
+     */
+    public static async queryAccountInfo(uid:number):Promise<DaoResult<DbUserAccountInfo>>{
+        return await this.execute(async (exe:DaoExecute):Promise<DaoResult<DbUserAccountInfo>>=>{
+            let sql = exe.format('select * from %s where uid=? ',DefDaoTable.USER_ACCOUNT_INFO);
+            let param = [uid];
+            let res = await exe.select(sql,param);
+            if(res.length <= 0){
+                return DaoResult.fail('操作失败');
+            }
+            return DaoResult.succeed(res[0]);
+        });
+    }
+    /**
+     * 更新用户信息
+     * @param uid 
+     * @param data 
+     */
+    public static async updateAccountInfo(uid:number,data:{[key:string]:any}):Promise<DaoResult<boolean>>{
+        return await this.execute(async (exe:DaoExecute):Promise<DaoResult<boolean>>=>{
+            let sql = exe.format('update %s set ? where uid=?',DefDaoTable.USER_ACCOUNT_INFO);
+            let param = [data,uid];
+            let res = await exe.update(sql,param);
+            if(res.affectedRows <= 0){
+                return DaoResult.fail('操作失败');
+            }
+            return DaoResult.succeed(true);
+        });
+    }
 }
